@@ -3,7 +3,7 @@ from .base import *
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['159.203.160.35']
 
 
 #
@@ -38,6 +38,9 @@ DATABASES = {
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR.child('static')] #indicao donde estaran los archivos estaticos y CSS del projecto
+STATIC_ROOT = BASE_DIR.child('staticfiles')
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT= BASE_DIR.child('media') 
+
