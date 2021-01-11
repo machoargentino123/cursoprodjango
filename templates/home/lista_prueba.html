@@ -1,0 +1,21 @@
+<h1>
+    Lista prueba listview
+</h1>
+
+<ul>
+<strong>Listado de valores de la base sin filtro.</strong>
+{% for i in lista %}
+<li>{{ i }}</li>
+{% endfor %}
+</ul>
+
+
+
+<ul>
+<strong>Listado de valores de la base con filtro.</strong>
+<strong>Se filtran los valores con el metodo .titulo .subtitulo .cantidad</strong>
+{% for i in lista %}
+<li>{{ i.titulo }} el Subtitulo es: {{ i.subtitulo }} con valor: {{ i.cantidad}}</li>
+{% endfor %}
+</ul>
+

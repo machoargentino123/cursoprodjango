@@ -1,0 +1,74 @@
+{% extends 'include/base.html' %}
+
+
+{% block title %}
+Administrar empleados
+{% endblock title %}
+
+{% block content %}
+{% include 'include/header.html' %}
+<div class="grid-container">
+    <div class="grid-x">
+        <h1 class="cell"><b>Administrar Empleados</b></h1>
+    </div>
+        <div class="cell grid-x">
+            <table>
+                <thead>
+                  <tr>
+                    <th width="100">Id</th>
+                    <th>Nombre</th>
+                    <th width="350">Apellido</th>
+                    <th width="250">Departamento</th>
+                    <th width="100">Editar</th>
+                    <th width="100">Eliminar</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                    <!--Listado con variable por defecto object_list.</strong>-->
+                    {% for i in lista %}
+                    <tr>
+                    <td>{{ i.id }}</td>
+                    <td>{{ i.first_name }}</td>
+                    <td>{{ i.last_name }}</td>
+                    <td>{{ i.departamento.short_name }}</td>
+                    <td><a href="{% url 'persona_app:actualizar' i.id %}" class="success button ">Editar</td>
+                    <td><a href="{% url 'persona_app:delete' i.id %}" class="warning button">Eliminar</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+              </table>
+              <!-- is_paginated, indica si hay un numero de paginas para ver-->
+            <!-- page_object.has_previous, indica si hay un numero de paginas at-->
+            <!-- Ojo con esto-->
+            
+            {% if is_paginated %}
+                <nav aria-label="Pagination">
+                    <ul class="pagination">
+                        <!-- Si existe pagina anterior-->
+                        {% if page_obj.has_previous%}   
+                            <li class="pagination-previous"><a href="?page={{page_obj.previous_page_number}}" aria-label="Next page">Anterior <span class="show-for-sr">Pagina</span></a></li>
+                        {% endif %} 
+
+                        <!-- crea los links para todas las paginas-->
+                        {% for pagina in paginator.page_range%}
+                            <!-- si pagina es igual a page_obj.number, entonces resalto en azul-->
+                            {% ifequal pagina page_obj.number  %} 
+                                <li class="current"><span class="show-for-sr">Estas en la pagina</span>{{pagina}}</li>
+                            {% else%}<!-- sino continuo-->
+                                <li><a href="?page={{pagina}}" aria-label="Page 2">{{pagina}}</a></li>
+                            {% endifequal %}  
+                        {% endfor %}
+                        <!-- Si existe pagina posterior-->
+                        {% if page_obj.has_next %}
+                            <li class="pagination-next"><a href="?page={{page_obj.next_page_number}}" aria-label="Next page">Proxima <span class="show-for-sr">Pagina</span></a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+              
+         </div>
+</div>
+
+{% endblock content %}

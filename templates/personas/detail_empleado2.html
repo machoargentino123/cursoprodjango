@@ -1,0 +1,81 @@
+
+
+
+
+{% extends 'include/base.html' %}
+
+
+{% block title %}
+{{ object.full_name}}
+{% endblock title %}
+
+{% block content %}
+{% include 'include/header.html' %}
+{% load static %}
+<div class="grid-container">
+    <div class="grid-x  grid-margin-x">
+        <h1 class="cell"> Detalle de Empleado: {{empleados.first_name}} {{ empleados.last_name}} </h1>
+        <div class="card" style="width: 300px;">
+            <div class="card-divider">
+                <div class="grid-x grid-margin-x large-5"></div>
+                    <div class="grid-x large-7" >
+                        <div class="cell large-5">
+                            {% if empleados.Avatar  %}
+                                <img src="{{ empleados.Avatar.url }}">
+                            {% else %}
+
+                                <img src="{% static 'img/7.jpg'%}">
+                                
+                            {% endif %}
+                        </div>
+                        <div>
+                                <div class="card-section">
+                                    <div class="cell">
+                                        Departamento: {{empleados.departamento.name}}
+                                    </div>
+                                    <div class="cell">
+                                        Con tareas: {{empleados.get_job_display}}
+                                    </div>
+                                    <div class="cell">
+                                        <!--Relacion many to many etiqueta all--->
+                                        <h5 class="cell">Habilidades:</h5>
+                                            <ul>
+                                                    {% for i in empleados.habilidad.all %}
+                                                    <li>
+                                                        {{i.habilidad}}
+                                                    </li>
+                                                    {% endfor %}
+                                            </ul>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock content %}
+
+
+
+
+<div class="grid container">
+    <div class='grid-x'>
+    <h1 class="cell"><b>Detalle de empleado usando detailview</b></h1>
+        <div class="callout secondary">
+            <h5>Empleado {{object.first_name}} {{ object.last_name}} </h5>
+            <p>Posee el id: {{object.id}}</p>
+            <p>Trabaja en el: {{object.departamento}}</p>
+            <p>Con tareas: {{object.job}}</p>
+            <p>Trabaja en el: {{object.habilidad}}</p>
+            <a href="{% url 'persona_app:Empleados_all' %}">Volver a listar</a>
+        </div>
+
+
+    </div>
+
+
+</div>

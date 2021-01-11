@@ -1,0 +1,18 @@
+<h1>
+    Lista de empleados por caja con palabra clave
+</h1>
+
+
+<!-- por seguridad tengo que pasar el token para evitar que se pueda mandar cualquier cosa csrf_token -->
+<form method="GET">{% csrf_token %} 
+    <input type="text" id="kword" name="kword" placeholder="ingrese nombre"> <!-- id y name deben ser iguales -->
+    <button type="submit">Buscar</button>
+</form>
+
+
+<ul>
+<strong>Listado con la plabra clave "{{palabra_clave}}"</strong>
+{% for i in empleados %}
+<li>{{ i }}</li>
+{% endfor %}
+</ul>

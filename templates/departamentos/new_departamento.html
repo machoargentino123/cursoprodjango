@@ -1,0 +1,42 @@
+{% extends 'include/base.html' %}
+
+
+{% block title %}
+Lista de todos los empleados usando listview
+{% endblock title %}
+
+{% block content %}
+{% include 'include/header.html' %}
+
+
+<div class="grid-container">
+  <div class="grid-x grid-padding-x">
+      <h1 class="cell"> Agregar un nuevo departamento </h1>
+        <form class="cell callout " method= "POST">{% csrf_token %}
+          <div class="medium-6 cell">
+            <label>Nombre:   {{form.nombre}}
+            </label>
+          </div>
+          <div class="medium-6 cell">
+              <label>Apellido: {{form.apellido}}
+              </label>
+            </div>  
+            <div class="medium-6 cell">
+              <label>Departameto: {{form.departamento}}
+              </label>
+            </div> 
+            <div class="medium-6 cell">
+              <label>Shortname:  {{form.shortname}}
+              </label>
+            </div>  
+            </div>
+            <label for="reset1" class="button">borrar datos</label>
+            <button type="reset" id="reset1" class="show-for-sr"></button>
+            <label for="submit" class="button">Submit</label>
+            <button type="submit" id="submit" class="show-for-sr"></button>
+          </div>
+      </form>
+  </div>
+</div>
+
+  {% endblock content %}

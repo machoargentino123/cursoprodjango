@@ -1,0 +1,41 @@
+
+{% extends 'include/base.html' %}
+
+
+{% block title %}
+Administrar empleados
+{% endblock title %}
+
+{% block content %}
+{% include 'include/header.html' %}
+<form method= "POST">{% csrf_token %}
+        <div class="grid-container">
+                <div class="grid-x grid-margin-x">
+                        <h1 class='cell'>Eliminar Empleado: {{object.first_name.upper}} {{object.last_name.upper}}</h1>
+                        <div class='cell large-6'>
+                                <div class="callout warning">
+                                        <h5><b>¿Estas seguro que deseas borrar el registro?</b></h5>
+                                        <p><b>Luego de borrar este registro no se podra volver atras</b></p>
+                                </div>
+                        </div>
+                        <div class="cell">
+                                <button type="submit" class="alert button">Eliminar</button>
+                        </div>
+                                                  
+                </div>
+        </div>
+</form>
+
+
+
+
+{% endblock content %}
+
+
+<form method= "POST">{% csrf_token %}
+        <div class="callout warning">
+                 <h5><b>¿Estas seguro que deseas borrar el registro?</b></h5>
+                 <p><b>Luego de borrar este registro no se podra volver atras</b></p>
+         </div>
+                 <button type="submit" class="alert button">Eliminar</button>
+ </form>

@@ -1,0 +1,85 @@
+
+{% extends 'include/base.html' %}
+
+
+{% block title %}
+Lista empleados usado listview
+{% endblock title %}
+
+{% block content %}
+{% include 'include/header.html' %}
+
+<div class="grid-container">
+    <div class="grid-x">
+        <h1 class="cell"><b>Lista de empleados por area usando listview</b></h1>
+
+        <form class="cell grid-x grid-margin-x" method="GET">{% csrf_token %}
+            <div class="cell large-7"><input type="text" id="kword" name="kword" placeholder="Buscar Empleado"></div>
+            
+            <div class="cell large-2">
+                <button type="submit" class="success button">
+                    Buscar
+                </button>
+            </form>
+        </div>
+
+        <div class="cell grid-x">
+            <table>
+                <thead>
+                  <tr>
+                    <th width="100">Id</th>
+                    <th>Nombre</th>
+                    <th width="250">Apellido</th>
+                    <th width="350">Departamento</th>
+                    <th width="150">accion</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                    <!--Listado con variable por defecto object_list.</strong>-->
+                    {% for i in object_list %}
+                    <tr>
+                    <td>{{ i.id }}</td>
+                    <td>{{ i.first_name }}</td>
+                    <td>{{ i.last_name }}</td>
+                    <td>{{ i.departamento }}</td>
+                    <td><a href="{% url 'persona_app:empleado_detail' i.id %}" class="button warning">Ver Detalle Empleado</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+              </table>
+              <!-- is_paginated, indica si hay un numero de paginas para ver-->
+            <!-- page_object.has_previous, indica si hay un numero de paginas at-->
+            <!-- Ojo con esto-->
+            
+            {% if is_paginated %}
+                <nav aria-label="Pagination">
+                    <ul class="pagination">
+                        <!-- Si existe pagina anterior-->
+                        {% if page_obj.has_previous%}   
+                            <li class="pagination-previous"><a href="?page={{page_obj.previous_page_number}}" aria-label="Next page">Anterior <span class="show-for-sr">Pagina</span></a></li>
+                        {% endif %} 
+
+                        <!-- crea los links para todas las paginas-->
+                        {% for pagina in paginator.page_range%}
+                            <!-- si pagina es igual a page_obj.number, entonces resalto en azul-->
+                            {% ifequal pagina page_obj.number  %} 
+                                <li class="current"><span class="show-for-sr">Estas en la pagina</span>{{pagina}}</li>
+                            {% else%}<!-- sino continuo-->
+                                <li><a href="?page={{pagina}}" aria-label="Page 2">{{pagina}}</a></li>
+                            {% endifequal %}  
+                        {% endfor %}
+                        <!-- Si existe pagina posterior-->
+                        {% if page_obj.has_next %}
+                            <li class="pagination-next"><a href="?page={{page_obj.next_page_number}}" aria-label="Next page">Proxima <span class="show-for-sr">Pagina</span></a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+              
+        </div>
+
+{% endblock %}
+
+

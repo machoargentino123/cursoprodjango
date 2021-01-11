@@ -1,0 +1,43 @@
+{% load static %} <!--cargo el static-->>
+<h1>Resumen foundation ya tiene el CSS aunque este antes de lo declarado en doctype</h1>
+<p>{{ fecha }} </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--importo foundation CSS-->
+    <link rel="stylesheet" href="{% static 'css/foundation.css' %}">
+     <!--Ojo que la ruta en static va con '-->
+
+    <title>Document</title>
+</head>
+<body>
+    <hr>
+
+    <h3>Resumen foundation <small>Version 6.6.1</small></h3>
+
+    <!--Lo siguiente es un lienzo de foundation de 12 partes verticales--> 
+    <div class='grid-x' style="border: 5px solid green";>
+        <!--ocupa las 8 casillas de la grilla padre, pero como el de abajo ocupa los 12 no se desompagina. --> 
+        <h2 class='cell large-8' style="border: 1px solid peru"> elemento 1</h2>
+    <!--ocupa las 5 casillas de la grilla padre y debo completar con las 7-->
+    <!--  restantes sino se me descompagina todo. --> 
+        <h2 class='cell large-5' style="border: 1px solid red"> elemento 2</h2>
+        <h2 class='cell large-7' style="border: 1px solid blue"> elemento 3</h2>
+    <!--Lo siguiente es un lienzo de foundation de 12 partes verticales--> 
+        <h2 class='cell' style="border: 1px solid orange"> elemento 4</h2>
+        
+     <!--Creo un lienzo dentro del lienzo principal grid-x de largo 6 cuando esta en pc-->
+      <!--largo 4 cuando esta en celular-->
+        <div class='cell small-12 large-6 grid-x' style="border: 1px solid green";>
+            <h4 class='cell large-5' style="border: 1px solid peru"> elemento hijo 1</h4>
+            <h4 class='cell large-5' style="border: 1px solid red"> elemento hijo 2</h4>
+            <h4 class='cell large-2' style="border: 1px solid blue"> elemento hijo 3</h4>
+            <h4 class='cell' style="border: 1px solid orange"> elemento hijo {{posicion}} {{posicion2}}</h4>
+        </div>
+    </div>
+
+    </body>
+</html>
