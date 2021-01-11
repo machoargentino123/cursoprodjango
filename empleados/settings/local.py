@@ -16,10 +16,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'dbempleado',
-        'USER': 'neuapp',
-        'PASSWORD': 'neuapp',
+        'USER': 'neunapp',
+        'PASSWORD': '03011988',
         'HOST':'localhost',
-        'PORT':'5433',
+        'PORT':'5432',
     }
 
   #'default': {
